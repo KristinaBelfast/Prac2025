@@ -1,0 +1,44 @@
+﻿<Window x:Class="Prac.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Prac"
+        mc:Ignorable="d"
+        Title="Админ-панель" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Button x:Name="AddTechnicButton" Content="Добавить" Click="AddTechnicButton_Click" Margin="5"/>
+            <Button x:Name="EditTechnicButton" Content="Редактировать" Click="EditTechnicButton_Click" Margin="5"/>
+            <Button x:Name="DeleteTechnicButton" Content="Удалить" Click="DeleteTechnicButton_Click" Margin="5"/>
+        </StackPanel>
+        <ListView x:Name="GridTechnics" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label Content="Год производства"/>
+                            <Label Content="{Binding ManufactureYear}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <Label Content="Тип техники"/>
+                            <Label Content="{Binding Type.Name}"/>
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Window>

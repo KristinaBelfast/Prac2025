@@ -1,0 +1,16 @@
+﻿<Window x:Class="Prac.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Prac"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="256" Width="308">
+    <StackPanel Margin="20">
+        <Label Content="Логин:" />
+        <TextBox x:Name="LoginTextBox" />
+        <Label Content="Пароль:" />
+        <PasswordBox x:Name="PasswordTextBox" />
+        <Button x:Name="LoginButton" Content="Войти" Click="LoginButton_Click" Margin="0,10,0,0" />
+    </StackPanel>
+</Window>
