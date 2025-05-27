@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Prac.Models;
+namespace Prac.Models1;
 
 public partial class RentalAgreement
 {
@@ -16,4 +16,6 @@ public partial class RentalAgreement
     public virtual Client? Client { get; set; }
 
     public virtual Employee? Employee { get; set; }
+
+    public virtual Order? Order { get; set; }
 }

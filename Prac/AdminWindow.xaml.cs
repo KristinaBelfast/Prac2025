@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
-using Prac.Models;
+using Prac.Models1;
 
 namespace Prac
 {
@@ -26,7 +26,7 @@ namespace Prac
         public AdminWindow()
         {
             InitializeComponent();
-            using(MyDatabaseContext _context = new MyDatabaseContext())
+            using(PracticaContext _context = new PracticaContext())
             {
                 Technics = new ObservableCollection<Technic>(_context.Technics.ToList());
             }
@@ -41,7 +41,7 @@ namespace Prac
             addTechnicWindow.ShowDialog();
 
             Technics.Clear();
-            using (MyDatabaseContext context = new MyDatabaseContext())
+            using (PracticaContext context = new PracticaContext())
             {
                 foreach (var technic in context.Technics.ToList())
                 {
@@ -62,11 +62,19 @@ namespace Prac
         private void DeleteTechnicButton_Click(object sender, RoutedEventArgs e)
         {
             Technic technic = (Technic)GridTechnics.SelectedItem;
-            using (MyDatabaseContext context = new MyDatabaseContext())
+            using (PracticaContext context = new PracticaContext())
             {
                 context.Remove(technic);
                 Technics.Remove(technic);
+                var orders = context.Orders.Where(or => or.TechnicId == technic.TechnicId).ToList();
+                foreach (var order in orders)
+                {
+                    context.RentalAgreements.Where(ra => ra.OrderId == order.OrderId).ExecuteDelete();
+                }
+                context.MaintenanceRecords.Where(mr => mr.TechnicId == technic.TechnicId).ExecuteDelete();
+
                 context.SaveChanges();
+
             }
         }
     }

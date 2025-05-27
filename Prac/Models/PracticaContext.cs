@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Prac.Models;
+namespace Prac.Models1;
 
-public partial class MyDatabaseContext : DbContext
+public partial class PracticaContext : DbContext
 {
-    public MyDatabaseContext()
+    public PracticaContext()
     {
     }
 
-    public MyDatabaseContext(DbContextOptions<MyDatabaseContext> options)
+    public PracticaContext(DbContextOptions<PracticaContext> options)
         : base(options)
     {
     }
@@ -184,7 +184,6 @@ public partial class MyDatabaseContext : DbContext
 
             entity.HasOne(d => d.Technic).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.TechnicId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("orders_technic_id_fkey");
         });
 
@@ -201,6 +200,11 @@ public partial class MyDatabaseContext : DbContext
             entity.Property(e => e.PaymentDate).HasColumnName("payment_date");
             entity.Property(e => e.PaymentMethodId).HasColumnName("payment_method_id");
             entity.Property(e => e.StatusId).HasColumnName("status_id");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("payments_order_id_fkey");
 
             entity.HasOne(d => d.PaymentMethod).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.PaymentMethodId)
@@ -250,6 +254,10 @@ public partial class MyDatabaseContext : DbContext
             entity.HasOne(d => d.Employee).WithOne(p => p.RentalAgreement)
                 .HasForeignKey<RentalAgreement>(d => d.EmployeeId)
                 .HasConstraintName("rental_agreements_employee_id_fkey");
+
+            entity.HasOne(d => d.Order).WithOne(p => p.RentalAgreement)
+                .HasForeignKey<RentalAgreement>(d => d.OrderId)
+                .HasConstraintName("rental_agreements_order_id_fkey");
         });
 
         modelBuilder.Entity<Role>(entity =>

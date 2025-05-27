@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Prac.Models;
+namespace Prac.Models1;
 
 public partial class Technic
 {

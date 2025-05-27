@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Prac.Models;
+using Prac.Models1;
 
 namespace Prac
 {
@@ -25,7 +25,7 @@ namespace Prac
         public ClientWindow()
         {
             InitializeComponent();
-            using (MyDatabaseContext _context = new MyDatabaseContext())
+            using (PracticaContext _context = new PracticaContext())
             {
                 Technics = new ObservableCollection<Technic>(_context.Technics.ToList());
             }

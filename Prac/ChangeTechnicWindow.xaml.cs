@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Prac.Models;
+using Prac.Models1;
 
 namespace Prac
 {
@@ -28,16 +28,18 @@ namespace Prac
             Initialize(tec_);
             TypesOfTechnics.ItemsSource = new List<String>
              {
-                 "бульдозер",
-                 "трактор",
-                 "бетономешалка"
+                 "Дрэгстеры",
+                 "Кросс-байки",
+                 "Мини-байки",
+                 "Питбайки",
+                 "Мотарды"
              };
 
         }
 
         public void Initialize(Technic technic)
         {
-            using (MyDatabaseContext context = new MyDatabaseContext())
+            using (PracticaContext context = new PracticaContext())
             {
                 var tec = context.TechnicTypes.Where(t => t.TypeId == technic.TypeId).FirstOrDefault();
                 string type = tec.Name;
@@ -50,7 +52,7 @@ namespace Prac
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            using (MyDatabaseContext context = new MyDatabaseContext())
+            using (PracticaContext context = new PracticaContext())
             {
                 context.Technics.Update(tec_);
                 context.SaveChanges();

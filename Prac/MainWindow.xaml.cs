@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
-using Prac.Models;
+using Prac.Models1;
 
 namespace Prac
 {
@@ -29,7 +29,7 @@ namespace Prac
             string login = LoginTextBox.Text;
             int password = Convert.ToInt32(PasswordTextBox.Password);
 
-            using (MyDatabaseContext context = new MyDatabaseContext())
+            using (PracticaContext context = new PracticaContext())
             {
                 var user = await context.Users.FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
 
